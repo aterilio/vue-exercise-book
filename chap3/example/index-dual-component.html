@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>Vue Component Registration</title>
+    </head>
+    <body>
+        <div id="app">
+            <button>Register Component</button>
+            <my-global-component></my-global-component>
+            <my-local-component></my-local-component>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+        <script>
+            // global
+            Vue.component('my-global-component', {
+                template: '<div>Registered global component!</div>'
+            });
+            // local
+            var cmp = {
+                // component contents
+                template: '<div>Registered local component!</div>'
+            };
+            new Vue({
+                el: '#app',
+                components: {
+                    'my-local-component': cmp
+                }
+            });
+        </script>
+    </body>
+</html>

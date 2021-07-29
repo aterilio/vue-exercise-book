@@ -20,4 +20,4 @@ var app = new Vue({
         // add data property & value -> props for sibling-component
         anotherMessage: 'test message for sibling component'
     }
-})
+});

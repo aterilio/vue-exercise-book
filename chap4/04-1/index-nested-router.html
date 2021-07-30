@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vue Nested Router</title>
+    </head>
+    <body>
+        <style>
+            .main {
+                background-color: lightgray;
+            }
+            .user {
+                background-color: lightblue;
+            }
+            .post {
+                background-color: lightpink;
+            }
+            .profile {
+                background-color: lightgoldenrodyellow;
+            }
+        </style>
+
+        <div id="app" class="main">
+            <router-link to="/user">Move to User component</router-link>
+            <br>
+            <router-view></router-view>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+        <script>
+            var User = {
+                template: `
+                    <div class="user">
+                        User Component
+                        <br>
+                        <router-link to="/user/posts">Move to UserPost component</router-link>
+                        <br>
+                        <router-link to="/user/profile">Move to UserProfile component</router-link>
+                        <router-view></router-view>
+                    </div>
+                `
+            };
+            var UserProfile = {
+                template: '<div class="profile">User Profile Component</div>'
+            };
+            var UserPost = {
+                template: '<div class="post">User Post Component</div>'
+            };
+
+            var routes = [
+                {
+                    path: '/user',
+                    component: User,
+                    children: [
+                        {
+                            path: 'posts',
+                            component: UserPost
+                        },
+                        {
+                            path: 'profile',
+                            component: UserProfile
+                        }
+                    ]
+                }
+            ];
+
+            var router = new VueRouter({
+                routes
+            });
+
+            var app = new Vue({
+                router
+            }).$mount('#app');
+        </script>
+    </body>
+</html>

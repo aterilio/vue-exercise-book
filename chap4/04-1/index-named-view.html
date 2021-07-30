@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vue Named View Sample</title>
+    </head>
+    <body>
+        <style>
+            .main {
+                background-color: lightgray;
+            }
+            .body {
+                background-color: lightblue;
+            }
+            .header {
+                background-color: lightpink;
+            }
+            .footer {
+                background-color: lightgoldenrodyellow;
+            }
+        </style>
+
+        <div id="app" class="main">
+            <router-view name="header"></router-view>
+            <router-view></router-view>
+            <router-view name="footer"></router-view>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+        <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+        <script>
+            var Body = {
+                template: '<div class="body">This is Body</div>'
+            };
+            var Header = {
+                template: '<div class="header">This is Header</div>'
+            };
+            var Footer = {
+                template: '<div class="footer">This is Footer</div>'
+            };
+
+            var routes = [
+                {
+                    path: '/',
+                    components: {
+                        default: Body,
+                        header: Header,
+                        footer: Footer
+                    }
+                }
+            ];
+
+            var router = new VueRouter({
+                routes
+            });
+
+            var app = new Vue({
+                router
+            }).$mount('#app');
+        </script>
+    </body>
+</html>
